@@ -1,0 +1,708 @@
+{
+    "openapi":"3.0.0",
+    "info":{
+        "title": "Central do Som API Documentação",
+        "description":"Nesta documentação, você poderá consultar os pontos finais da API e também testar todas as rotas disponíveis. Não se esqueça de se registrar e realizar a autorização.",
+        "version": "1.0.0"
+    },
+    "servers":[
+        {
+          "url": "https://api-centraldosom.onrender.com",
+          "description":"Render Server"
+        },
+        {
+          "url": "http://localhost:5000",
+          "description":"Local Server" 
+        }
+    ],
+    "paths":{
+        "/user/":{
+            "post": {
+                "summary": "Create a new user",
+                "description": "Route responsible for creating a new user",
+                "tags": ["Users"],
+                "requestBody": {
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/User"
+                      },
+                      "examples": {
+                        "Users": {
+                          "value": {
+                            "name": "Jose Lima",
+                            "email": "limajose@gmail.com",
+                            "number": "99123456789",
+                            "city":"Picos",
+                            "state":"PI",
+                            "password": "12345678"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "responses": {
+                  "400": {
+                    "description": "Not Found"
+                  },
+                  "201": {
+                    "description": "Created",
+                    "content": {
+                      "application/json": {
+                        "schemma": {
+                          "type": "object",
+                          "$ref": "#/components/schemas/User"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+        },
+        "/user":{
+            "get": {
+                "summary": "Search all users",
+                "description": "Route responsible for fetching all users",
+                "tags": ["Users"],
+                "security": [{ "bearerAuth": [] }],
+                "responses": {
+                  "401": {
+                    "description": "Unauthorized"
+                  },
+                  "400": {
+                    "description": "Not Found"
+                  },
+                  "200": {
+                    "description": "OK",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/User"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+        },
+        "/user/{id}/":{
+            "get": {
+                "summary": "Search user by id",
+                "description": "Route responsible for searching for user by id",
+                "tags": ["Users"],
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                  {
+                    "in": "path",
+                    "name": "id",
+                    "type": "string",
+                    "description": "User ID",
+                    "required": true
+                  }
+                ],
+                "responses": {
+                  "401": {
+                    "description": "Unauthorized"
+                  },
+                  "400": {
+                    "description": "Not Found"
+                  },
+                  "200": {
+                    "description": "OK",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "type": "object",
+                          "$ref": "#/components/schemas/User"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+        },
+        "/user/{id}":{
+            "patch": {
+                "summary": "Update user by id",
+                "description": "Route responsible for editing the user by id",
+                "tags": ["Users"],
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                  {
+                    "in": "path",
+                    "name": "id",
+                    "type": "string",
+                    "description": "User ID",
+                    "required": true
+                  }
+                ],
+                "requestBody": {
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/User"
+                      },
+                      "examples": {
+                        "Users": {
+                          "value": {
+                            "name": "Thiago Lima"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "responses": {
+                  "401": {
+                    "description": "Unauthorized"
+                  },
+                  "400": {
+                    "description": "Not Found"
+                  },
+                  "200": {
+                    "description": "OK",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "type": "object",
+                          "$ref": "#/components/schemas/User"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+        },
+        "/auth/":{
+            "post": {
+                "summary": "Login to Central do Som",
+                "description": "Route responsible for loging in a registered user",
+                "tags": ["Auth"],
+                "requestBody": {
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/User"
+                      },
+                      "examples": {
+                        "User": {
+                          "value": {
+                            "email": "limajose@gmail.com",
+                            "password": "12345678"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "responses": {
+                  "400": {
+                    "description": "Not Found"
+                  },
+                  "200": {
+                    "description": "OK"
+                  }
+                }
+              }
+        },
+        "/auth":{
+          "get": {
+              "summary": "Valid Token",
+              "description": "Route responsible valid user token",
+              "tags": ["Users"],
+              "security": [{ "bearerAuth": [] }],
+              "responses": {
+                "401": {
+                  "description": "Unauthorized"
+                },
+                "400": {
+                  "description": "Not Found"
+                },
+                "200": {
+                  "description": "OK",
+                  "content": {
+                    "application/json": {}
+                  }
+                }
+              }
+            }
+      },
+        "/imagens/{imageName}":{
+            "get": {
+                "summary": "Search imagem by name",
+                "description": "Route responsible for searching for imagem by name",
+                "tags": ["Imagem"],
+                "parameters": [
+                    {
+                      "in": "path",
+                      "name": "imageName",
+                      "type": "string",
+                      "description": "name image",
+                      "required": true
+                    }
+                  ],
+                "responses": {
+                  "400": {
+                    "description": "Not Found"
+                  },
+                  "200": {
+                    "description": "OK"
+                  }
+                }
+              }
+        },
+        "/item/":{
+            "post": {
+                "summary": "Create a new item",
+                "description": "Route responsible for creating a new item",
+                "tags": ["Item"],
+                "security": [{ "bearerAuth": [] }],
+                "requestBody": {
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/Item"
+                      },
+                      "examples": {
+                        "Item": {
+                          "value": {
+                            "anunciante": "",
+                            "nome": "Caixa Bob",
+                            "categoria":"caixa",
+                            "tipo": "Novo",
+                            "descricao": "Caixa Bob de 12 polegadas top, só no jeito de usar!",
+                            "valor": "1500",
+                            "foto": "caixa.jpg"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "responses": {
+                  "401": {
+                    "description": "Unauthorized"
+                  },
+                  "400": {
+                    "description": "Not Found"
+                  },
+                  "201": {
+                    "description": "Created",
+                    "content": {
+                      "application/json": {
+                        "schemma": {
+                          "type": "object",
+                          "$ref": "#/components/schemas/Item"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+        },
+        "/item":{
+            "get": {
+                "summary": "Search all itens",
+                "description": "Route responsible for fetching all itens",
+                "tags": ["Item"],
+                "parameters": [
+                  {
+                    "in": "query",
+                    "name": "limit",
+                    "type": "string"
+                  },
+                  {
+                    "in": "query",
+                    "name": "offset",
+                    "type": "string"
+                  }
+                ],
+                "responses": {
+                  "400": {
+                    "description": "Not Found"
+                  },
+                  "200": {
+                    "description": "OK",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Item"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+        },
+        "/item/top":{
+            "get": {
+                "summary": "Search top Item",
+                "description": "Route responsible for fetching top Item",
+                "tags": ["Item"],
+                "responses": {
+                  "400": {
+                    "description": "Not Found"
+                  },
+                  "200": {
+                    "description": "OK",
+                    "content": {
+                      "application/json": {
+                        "schemma": {
+                          "type": "object",
+                          "$ref": "#/components/schemas/Item"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+        },
+        "/item/seach":{
+            "get": {
+                "summary": "Search Itens by title",
+                "description": "Route responsible for fetching the Item that match the title sent via query params",
+                "tags": ["Item"],
+                "responses": {
+                  "400": {
+                    "description": "Not Found"
+                  },
+                  "200": {
+                    "description": "OK",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Item"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }         
+        },
+        "/item/category":{
+            "get": {
+                "summary": "Search Itens by category",
+                "description": "Route responsible for fetching the Item that match the category sent via query params",
+                "tags": ["Item"],
+                "responses": {
+                  "400": {
+                    "description": "Not Found"
+                  },
+                  "200": {
+                    "description": "OK",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Item"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }  
+        },
+        "/item/type":{
+            "get": {
+                "summary": "Search Itens by type",
+                "description": "Route responsible for fetching the Item that match the type sent via query params",
+                "tags": ["Item"],
+                "responses": {
+                  "400": {
+                    "description": "Not Found"
+                  },
+                  "200": {
+                    "description": "OK",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Item"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }  
+        },
+        "/item/byUser":{
+            "get": {
+                "summary": "Search item by use id",
+                "description": "Route responsible for fetching item by use id",
+                "tags": ["Item"],
+                "security": [{ "bearerAuth": [] }],
+                "responses": {
+                  "400": {
+                    "description": "Not Found"
+                  },
+                  "401": {
+                    "description": "Unauthorized"
+                  },
+                  "200": {
+                    "description": "OK",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Item"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+        },
+        "/item/{id}/":{
+            "get": {
+                "summary": "Search Item by id",
+                "description": "Route responsible for fetching Item by id",
+                "tags": ["Item"],
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                  {
+                    "in": "path",
+                    "name": "id",
+                    "type": "string",
+                    "description": "Item ID",
+                    "required": true
+                  }
+                ],
+                "responses": {
+                  "401": {
+                    "description": "Unauthorized"
+                  },
+                  "400": {
+                    "description": "Not Found"
+                  },
+                  "200": {
+                    "description": "OK",
+                    "content": {
+                      "application/json": {
+                        "schemma": {
+                          "type": "object",
+                          "$ref": "#/components/schemas/Item"
+                        }
+                      }
+                    }
+                  }
+                }
+              }       
+        },
+        "/item/{id}":{
+            "patch": {
+                "summary": "Update a Item",
+                "description": "Route responsible for updating a Item",
+                "tags": ["Item"],
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                  {
+                    "in": "path",
+                    "name": "id",
+                    "type": "string",
+                    "description": "Item ID",
+                    "required": true
+                  }
+                ],
+                "requestBody": {
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/Item"
+                      },
+                      "examples": {
+                        "Post": {
+                          "value": {
+                            "nome": "Caixa Bob",
+                            "categoria":"caixa",
+                            "tipo": "Novo",
+                            "descricao": "Caixa Bob de 12 polegadas top, só no jeito de usar!",
+                            "valor": "1500",
+                            "foto": "caixa.jpg"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "responses": {
+                  "401": {
+                    "description": "Unauthorized"
+                  },
+                  "400": {
+                    "description": "Not Found"
+                  },
+                  "200": {
+                    "description": "OK",
+                    "content": {
+                      "application/json": {
+                        "schemma": {
+                          "type": "object",
+                          "$ref": "#/components/schemas/Item"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+        },
+        "/item/{id}":{
+            "delete": {
+                "summary": "Delete a Item",
+                "description": "Route responsible for deleting a Item",
+                "tags": ["Item"],
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                  {
+                    "in": "path",
+                    "name": "id",
+                    "type": "string",
+                    "description": "Item ID",
+                    "required": true
+                  }
+                ],
+                "responses": {
+                  "401": {
+                    "description": "Unauthorized"
+                  },
+                  "400": {
+                    "description": "Not Found"
+                  },
+                  "200": {
+                    "description": "OK"
+                  }
+                }
+              }
+        },
+        "/msg/":{
+            "post": {
+                "summary": "Create a Message",
+                "description": "Route responsible for creating a new message",
+                "tags": ["Users"],
+                "requestBody": {
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/Message"
+                      },
+                      "examples": {
+                        "Message": {
+                          "value": {
+                            "name": "Cacau Lima",
+                            "email": "clima@gmail.com",
+                            "password": "muito bom o site!"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "responses": {
+                  "400": {
+                    "description": "Not Found"
+                  },
+                  "201": {
+                    "description": "Created",
+                    "content": {
+                      "application/json": {
+                        "schemma": {
+                          "type": "object",
+                          "$ref": "#/components/schemas/Message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+        }
+    },
+    "components":{
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        },
+        "schemas": {
+            "User": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            },
+            "Item": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string"
+                },
+                "categoria": {
+                  "type": "string"
+                },
+                "tipo": {
+                  "type": "string"
+                },
+                "descricao": {
+                  "type": "string"
+                },
+                "valor": {
+                  "type": "string"
+                },
+                "anunciante": {
+                  "type": "string"
+                },
+                "foto": {
+                    "type": "string"
+                  },
+                "data": {
+                  "type": "date"
+                }
+              }
+            },
+            "Message": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "content_msg": {
+                      "type": "string"
+                    }
+                }
+            }
+        }
+      }
+}
