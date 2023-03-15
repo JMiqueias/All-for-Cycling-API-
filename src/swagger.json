@@ -7,7 +7,7 @@
     },
     "servers":[
         {
-          "url": "https://api-centraldosom.onrender.com",
+          "url": "https://api-all-for-cycling.onrender.com",
           "description":"Render Server"
         },
         {
