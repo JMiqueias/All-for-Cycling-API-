@@ -1,12 +1,12 @@
 {
   "name": "pdsi_ii",
   "version": "1.0.0",
-  "description": "Central do Som",
+  "description": "All for cycling",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Ericksulino Moura",
+  "author": "Miqueias Araujo",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",

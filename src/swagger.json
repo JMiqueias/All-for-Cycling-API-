@@ -1,7 +1,7 @@
 {
     "openapi":"3.0.0",
     "info":{
-        "title": "Central do Som API Documentação",
+        "title": "All for Cycling API Documentação",
         "description":"Nesta documentação, você poderá consultar os pontos finais da API e também testar todas as rotas disponíveis. Não se esqueça de se registrar e realizar a autorização.",
         "version": "1.0.0"
     },
@@ -179,7 +179,7 @@
         },
         "/auth/":{
             "post": {
-                "summary": "Login to Central do Som",
+                "summary": "Login to All for Cycling",
                 "description": "Route responsible for loging in a registered user",
                 "tags": ["Auth"],
                 "requestBody": {
@@ -271,12 +271,12 @@
                         "Item": {
                           "value": {
                             "anunciante": "",
-                            "nome": "Caixa Bob",
-                            "categoria":"caixa",
-                            "tipo": "Novo",
-                            "descricao": "Caixa Bob de 12 polegadas top, só no jeito de usar!",
+                            "nome": "Bicicleta",
+                            "categoria":"Bicicleta",
+                            "tipo": "Usado",
+                            "descricao": "Bicicleta Houston",
                             "valor": "1500",
-                            "foto": "caixa.jpg"
+                            "foto": "bike.jpeg"
                           }
                         }
                       }
